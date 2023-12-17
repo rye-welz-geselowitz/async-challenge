@@ -1,6 +1,6 @@
 # The Challenge 
 
-![Screen recording](https://github.com/rye-welz-geselowitz/async-challenge/blob/main/readme-content/screen-recording.gif?raw=true)
+<img src="https://github.com/rye-welz-geselowitz/async-challenge/blob/main/readme-content/screen-recording.gif?raw=true" width="150">
 
 This little web app fetches Wikipedia articles related to the user's search term. But it leaves the user waiting on the loading screen for a long time! Can you improve the user experience?
 
