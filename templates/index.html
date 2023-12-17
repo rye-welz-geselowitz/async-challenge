@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>Wikipedia Crawler</h1>
+    <h2>Show me articles related to...</h2>
+    <form id="search-form">
+        <input type="text" required id="search-term-input"></input>
+        <button>Go!</button>
+    </form>
+    <div id="loading" style="display: none">LOADING!!!</div>
+    <div id="results" style = "display: none"></div>
+
+  </body>
+  <script>
+
+    const makeTree = (parentDiv, treeData) => {
+        const treeDiv = $('<div></div>');
+        treeDiv.append(`<a href=${treeData.url} target="_blank">${treeData.title}</h3>`)
+        parentDiv.append(treeDiv)
+        const childList =  $('<ul></ul>')
+        treeData.children.forEach((childTree)=>{
+            const childTreeContainer = $('<li></li>')
+            const childTreeDiv = makeTree(
+                childTreeContainer,
+                childTree,  
+            )
+            childTreeContainer.append(childTreeDiv)
+            childList.append(childTreeContainer)
+        })
+        treeDiv.append(childList)
+
+    }
+    const showResults = (data) => {
+        const resultsDiv = $('#results')
+        $('#loading').hide()
+        makeTree(resultsDiv, data)
+        resultsDiv.show()
+    }
+
+    $('#search-form').submit((e)=>{
+        e.preventDefault()
+        $('#search-form').hide()
+        $('#loading').show()
+
+        const searchTerm = $('#search-term-input').val()
+        $.ajax({
+            url: `/tree?search_term=${searchTerm}`,
+            type: 'get',
+            success: showResults,
+            error: (error) => alert(error)
+        });
+    })
+
+
+  </script>
+</html>
