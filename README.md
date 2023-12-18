@@ -4,6 +4,8 @@
 
 This little web app fetches Wikipedia articles related to the user's search term. But it leaves the user waiting on the loading screen for a long time! Can you improve the user experience?
 
+HINT: Consider emailing the user their results when they're done!
+
 # Set up
 ## First time
 ### Create virtualenv
